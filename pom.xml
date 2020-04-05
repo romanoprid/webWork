@@ -14,10 +14,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>rest</name>
 	<description>Demo project for Spring Boot</description>
+
 	<properties>
 		<java.version>11</java.version>
-		<jib-maven-plugin.version>1.7.0</jib-maven-plugin.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -31,14 +32,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<!-- dependency> <groupId>org.hsqldb</groupId> <artifactId>hsqldb</artifactId> 
 			<scope>runtime</scope> </dependency -->
-		<!-- add my sql dependency -->
+
+		<!-- add mysql dependency -->
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -50,18 +56,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- openAPI spec -->
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.2.32</version>
-		</dependency>
 	</dependencies>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -93,21 +95,7 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<!-- upload the docker image to the Azure cloud -->
-			<plugin>
-				<artifactId>jib-maven-plugin</artifactId>
-				<groupId>com.google.cloud.tools</groupId>
-				<version>2.1.0</version>
-				<configuration>
-					<to>
-						<image>${docker.image.prefix}/${project.artifactId}</image>
-						<auth>
-							<username>${username}</username>
-							<password>${password}</password>
-						</auth>
-					</to>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
+
 </project>

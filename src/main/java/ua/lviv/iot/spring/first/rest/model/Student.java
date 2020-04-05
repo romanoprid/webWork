@@ -1,52 +1,67 @@
 package ua.lviv.iot.spring.first.rest.model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Student {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
 
-	private String firstName;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "group_id")
+    @JsonIgnoreProperties("students")
+    private Group group;
 
-	private String lastName;
+    private String firstName;
+    private String lastName;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+    public Student() {
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public Student(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Student() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public Student(String firstName, String lastName) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public Group getGroup() {
+        return group;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
 }
