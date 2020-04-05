@@ -1,7 +1,6 @@
 package ua.lviv.iot.spring.first.rest.model;
 
 import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,14 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "\"group\"")
 public class Group {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
     private String name;
@@ -27,7 +26,12 @@ public class Group {
     @JsonIgnoreProperties("group")
     private Set<Student> students;
 
-    public Group() {
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 
     public Integer getId() {
@@ -54,12 +58,6 @@ public class Group {
         this.enrollmentYear = enrollmentYear;
     }
 
-    public Set<Student> getStudents() {
-        return students;
+    public Group() {
     }
-
-    public void setStudents(Set<Student> students) {
-        this.students = students;
-    }
-
 }

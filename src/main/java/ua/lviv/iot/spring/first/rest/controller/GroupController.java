@@ -19,4 +19,5 @@ public class GroupController {
     public List<Group> getAllGroups() {
         return groupService.findAll();
     }
+
 }

@@ -7,11 +7,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Student {
+
+    private String name;
+
+    private String lastName;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -21,14 +25,20 @@ public class Student {
     @JsonIgnoreProperties("students")
     private Group group;
 
-    private String firstName;
-    private String lastName;
-
-    public Student() {
+    public Group getGroup() {
+        return group;
     }
 
-    public Student(String firstName, String lastName) {
-        this.firstName = firstName;
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public Student() {
+
+    }
+
+    public Student(String name, String lastName) {
+        this.setName(name);
         this.lastName = lastName;
     }
 
@@ -40,12 +50,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getLastName() {
@@ -54,14 +64,6 @@ public class Student {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
     }
 
 }
