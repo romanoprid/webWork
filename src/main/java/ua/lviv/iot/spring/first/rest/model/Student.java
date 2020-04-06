@@ -1,18 +1,22 @@
 package ua.lviv.iot.spring.first.rest.model;
 
+import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQuery;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
+@NamedNativeQuery(name = "Student.findBestStudent", query = "select * from student where id = 1")
 public class Student {
 
-    private String name;
+    private String firstName;
 
     private String lastName;
 
@@ -24,6 +28,10 @@ public class Student {
     @JoinColumn(name = "group_id")
     @JsonIgnoreProperties("students")
     private Group group;
+
+    @JsonIgnoreProperties("students")
+    @ManyToMany(mappedBy = "students")
+    private Set<Subject> subjects;
 
     public Group getGroup() {
         return group;
@@ -37,8 +45,8 @@ public class Student {
 
     }
 
-    public Student(String name, String lastName) {
-        this.setName(name);
+    public Student(String firstName, String lastName) {
+        this.setFirstName(firstName);
         this.lastName = lastName;
     }
 
@@ -50,12 +58,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
@@ -64,6 +72,14 @@ public class Student {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 
 }

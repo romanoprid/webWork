@@ -6,32 +6,27 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "\"group\"")
-public class Group {
+public class Subject {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     private String name;
 
-    private Integer enrollmentYear;
-
-    @OneToMany(mappedBy = "group", fetch = FetchType.EAGER)
-    @JsonIgnoreProperties("group")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "Student_Subjects", joinColumns = { @JoinColumn(name = "subject_id") }, inverseJoinColumns = {
+            @JoinColumn(name = "student_id", nullable = false) })
+    @JsonIgnoreProperties("subjects")
     private Set<Student> students;
 
-    public Set<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(Set<Student> students) {
-        this.students = students;
+    public Subject() {
     }
 
     public Integer getId() {
@@ -50,14 +45,11 @@ public class Group {
         this.name = name;
     }
 
-    public Integer getEnrollmentYear() {
-        return enrollmentYear;
+    public Set<Student> getStudents() {
+        return students;
     }
 
-    public void setEnrollmentYear(Integer enrollmentYear) {
-        this.enrollmentYear = enrollmentYear;
-    }
-
-    public Group() {
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 }
