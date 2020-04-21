@@ -2,7 +2,7 @@ package ua.lviv.iot.spring.first.dataaccess;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ua.lviv.iot.spring.first.rest.model.Group;
+import ua.lviv.iot.spring.first.model.Group;
 
 @Repository
 public interface GroupRepository extends JpaRepository<Group, Integer> {
